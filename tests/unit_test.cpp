@@ -130,8 +130,11 @@ namespace detail {
         decltype(std::end(std::declval<T&>())),
         typename T::value_type
     >> : std::true_type {
-        // Exclude raw pointers; iterator types won't satisfy begin/end + value_type.
-        static constexpr bool value = !std::is_pointer_v<T>;
+        // Also exclude iterator types (key fix: prevent container overload matching iterators)
+        static constexpr bool value = !std::is_same_v<
+            typename std::iterator_traits<T>::iterator_category,
+            std::random_access_iterator_tag
+        > && !std::is_pointer_v<T>;
     };
 
 } // namespace detail
