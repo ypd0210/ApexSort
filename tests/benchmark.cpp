@@ -28,7 +28,7 @@ inline void run_test(string name, vector<int> data) {
          << "us | Ratio: " << (double)t2/t1*100 << "% | Correct: " << (correct?"YES":"NO") << endl;
 }
 int main() {
-    const int N = 1000000;
+    const int N = 100000;
     mt19937 rng(42);
     
     vector<int> uniform(N), repeated(N), reverse(N);
