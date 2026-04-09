@@ -1,0 +1,23 @@
+# CMake build directories
+cmake-build-debug/
+cmake-build-release/
+build/
+out/
+
+# IDE folders
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Binaries
+*.exe
+*.dll
+*.so
+*.a
+*.o
+*.obj
+
+# OS files
+.DS_Store
+Thumbs.db
