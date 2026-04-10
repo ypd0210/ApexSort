@@ -23,12 +23,12 @@ inline void insertion_sort(It first, It last, Comp comp) {
     }
 }
 
-// ================= ApexSort 三路 partition 核心 =================
+// ================= ApexSort 3-way partition core =================
 template <typename It, typename Comp>
 void apex_sort_core(It first, int n, Comp comp) {
     if (n <= 32) { insertion_sort(first, first + n, comp); return; }
 
-    // 快速判断是否逆序 / 重复元素
+    // Quick check for reverse sorted / duplicate elements
     int sample = std::min(n, 32);
     bool reverse_sorted = true, duplicates = false;
     for (int i = 1; i < sample; ++i) {
@@ -38,9 +38,9 @@ void apex_sort_core(It first, int n, Comp comp) {
     }
     if (reverse_sorted) { std::reverse(first, first + n); return; }
 
-    // 三路 partition ApexSort
+    // 3-way partition ApexSort
     if (duplicates || reverse_sorted) {
-        // Pivot 选择：中间元素
+        // Pivot selection: middle element
         auto pivot = *(first + n/2);
         It lt = first, i = first, gt = first + n - 1;
         while (i <= gt) {
@@ -54,7 +54,7 @@ void apex_sort_core(It first, int n, Comp comp) {
         if (left < rest) { apex_sort_core(first, left, comp); apex_sort_core(gt + 1, rest, comp); }
         else { apex_sort_core(gt + 1, rest, comp); apex_sort_core(first, left, comp); }
     } else {
-        // 对随机均匀数据，直接用 pdqsort
+        // For random uniform data, use pdqsort directly
         pdqsort(first, first + n, comp);
     }
 }
