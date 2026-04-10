@@ -77,7 +77,8 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 # 6. 定义INTERFACE库（原有逻辑保留）
-add_library(ApexSort INTERFACE)
+add_library(ApexSort INTERFACE
+        tests/pdqsort.h)
 target_include_directories(ApexSort INTERFACE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
